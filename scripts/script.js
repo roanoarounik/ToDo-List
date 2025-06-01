@@ -1,6 +1,31 @@
-let tasksContainer = document.querySelector(`.tasksContainer`);
+let tasksContainer = $(`.tasksContainer`);
 
-tasksContainer.innerHTML = `No Tasks Yet`;
+tasksContainer.html(`No Tasks Yet`);
+
+const addTaskJQ = (event) => {
+    let taskName = prompt(`Enter Task Name`);
+    let taskElement = $(`
+        <div class="task">
+            <input type="checkbox" name="taskComplete">  
+            <span class="taskName">${taskName}</span>
+            <div class="actions">
+                <button class="edtBtn actionBtn"> 
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button class="delBtn actionBtn"> 
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        </div>    
+    `);
+
+    if (tasksContainer) {
+        if (tasksContainer.html() == `No Tasks Yet`) {
+            tasksContainer.html(``);
+        }
+        tasksContainer.append(taskElement);
+    }
+}
 
 const addTask = (event) => {
     let taskName = prompt(`Enter Task Name`);
