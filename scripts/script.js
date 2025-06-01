@@ -1,19 +1,22 @@
-let storedTasks = localStorage.getItem(`tasks`);
-let tasks = JSON.parse(storedTasks) || [];
+let tasksCount = $(`.tasksCount`);
+let zeroStateMessage = `No Tasks Yet`;
 let tasksContainer = $(`.tasksContainer`);
+
+let storedTasks = localStorage.getItem(`tasks`);
+let tasksArray = JSON.parse(storedTasks) || [];
 
 const addTaskJQ = () => {
     let taskName = prompt(`Enter Task Name`);
 
     let newTaskObj = {
         name: taskName,
-        id: tasks.length + 1,
+        id: tasksArray.length + 1,
     }
 
-    tasks.push(newTaskObj);
     addTaskToScreen(taskName);
-
-    localStorage.setItem(`tasks`, JSON.stringify(tasks));
+    tasksArray.push(newTaskObj);
+    if (tasksCount) tasksCount.html(`(${tasksArray.length})`);
+    localStorage.setItem(`tasks`, JSON.stringify(tasksArray));
 }
 
 const addTaskToScreen = (name) => {
@@ -33,17 +36,20 @@ const addTaskToScreen = (name) => {
     `);
 
     if (tasksContainer) {
-        if (tasksContainer.html() == `No Tasks Yet`) {
+        if (tasksContainer.html() == zeroStateMessage) {
             tasksContainer.html(``);
         }
         tasksContainer.append(taskElement);
     }
 }
 
-if (tasks.length > 0) {
-    tasks.forEach(tsk => {
-        addTaskToScreen(tsk.name);
-    })
-} else {
-    tasksContainer.html(`No Tasks Yet`);
+const initializeToDoListApp = () => {
+    if (tasksArray.length > 0) {
+        if (tasksCount) tasksCount.html(`(${tasksArray.length})`);
+        tasksArray.forEach(taskInArray => addTaskToScreen(taskInArray.name));
+    } else {
+        tasksContainer.html(zeroStateMessage);
+    }
 }
+
+initializeToDoListApp();
