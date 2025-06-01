@@ -12,7 +12,38 @@ button {
     padding: 8px;
     border: none;
     outline: none;
+    cursor: pointer;
     font-size: 1.5em;
     border-radius: 10px;
     background: lightgreen;
+}
+
+.delBtn {
+    color: white;
+    font-size: 15px;
+    background: red;
+    padding: 8px 12px;
+}
+
+input[type="checkbox"] {
+    --size: 30px;
+    cursor: pointer;
+    min-width: var(--size);
+    min-height: var(--size);
+}
+
+.task {
+    padding: 10px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    gap: 15px;
+    box-shadow: 0 0 4px rgb(0 0 0 / 50%);
+    border-radius: 15px;
+}
+
+.tasksContainer {
+    display: flex;
+    grid-gap: 15px;
+    flex-direction: column;
 }
