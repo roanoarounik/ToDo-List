@@ -1,13 +1,26 @@
+let storedTasks = localStorage.getItem(`tasks`);
+let tasks = JSON.parse(storedTasks) || [];
 let tasksContainer = $(`.tasksContainer`);
 
-tasksContainer.html(`No Tasks Yet`);
-
-const addTaskJQ = (event) => {
+const addTaskJQ = () => {
     let taskName = prompt(`Enter Task Name`);
+
+    let newTaskObj = {
+        name: taskName,
+        id: tasks.length + 1,
+    }
+
+    tasks.push(newTaskObj);
+    addTaskToScreen(taskName);
+
+    localStorage.setItem(`tasks`, JSON.stringify(tasks));
+}
+
+const addTaskToScreen = (name) => {
     let taskElement = $(`
         <div class="task">
             <input type="checkbox" name="taskComplete">  
-            <span class="taskName">${taskName}</span>
+            <span class="taskName">${name}</span>
             <div class="actions">
                 <button class="edtBtn actionBtn"> 
                     <i class="fa-solid fa-pencil"></i>
@@ -27,38 +40,10 @@ const addTaskJQ = (event) => {
     }
 }
 
-const addTask = (event) => {
-    let taskName = prompt(`Enter Task Name`);
-    if (taskName) {
-        let taskElement = document.createElement(`div`);
-        let taskCheckbox = document.createElement(`input`);
-        let taskNameElement = document.createElement(`span`);
-        let taskActionsElement = document.createElement(`div`);
-        let taskEditButton = document.createElement(`button`);
-        let taskDelButton = document.createElement(`button`);
-
-        taskElement.className = `task`;
-        taskCheckbox.type = `checkbox`;
-        taskCheckbox.name = `taskComplete`;
-        taskNameElement.innerHTML = taskName;
-        taskNameElement.className = `taskName`;
-        taskActionsElement.className = `actions`;
-        taskEditButton.className = `edtBtn actionBtn`;
-        taskDelButton.className = `delBtn actionBtn`;
-        taskEditButton.innerHTML = `<i class="fa-solid fa-pencil"></i>`;
-        taskDelButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
-
-        taskElement.append(taskCheckbox);
-        taskElement.append(taskNameElement);
-        taskActionsElement.append(taskEditButton);
-        taskActionsElement.append(taskDelButton);
-        taskElement.append(taskActionsElement);
-
-        if (tasksContainer) {
-            if (tasksContainer.innerHTML == `No Tasks Yet`) {
-                tasksContainer.innerHTML = ``;
-            }
-            tasksContainer.append(taskElement);
-        }
-    }
+if (tasks.length > 0) {
+    tasks.forEach(tsk => {
+        addTaskToScreen(tsk.name);
+    })
+} else {
+    tasksContainer.html(`No Tasks Yet`);
 }
