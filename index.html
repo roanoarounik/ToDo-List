@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <title>ToDo List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+    <script src="./scripts/script.js" defer></script>
 </head>
 <body>
     
     <header>
         <h1>To Do List</h1>
-        <button class="addBtn">
+        <button class="addBtn" onclick="addTask(event)">
             Add 
             <i class="fa-solid fa-circle-plus"></i>
         </button>
@@ -20,7 +22,7 @@
 
     <main>
         <section class="tasksContainer">
-            <div class="task">
+            <!-- <div class="task">
                 <input type="checkbox" name="taskComplete">  
                 <span class="taskName">Wallet</span>
                 <div class="actions">
@@ -31,31 +33,7 @@
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
-            </div>
-            <div class="task">
-                <input type="checkbox" name="taskComplete">  
-                <span class="taskName">Wallet</span>
-                <div class="actions">
-                    <button class="edtBtn actionBtn"> 
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <button class="delBtn actionBtn"> 
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="task">
-                <input type="checkbox" name="taskComplete">  
-                <span class="taskName">Wallet</span>
-                <div class="actions">
-                    <button class="edtBtn actionBtn"> 
-                        <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <button class="delBtn actionBtn"> 
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            </div>
+            </div> -->
         </section>
     </main>
 
